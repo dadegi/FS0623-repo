@@ -3,6 +3,7 @@ import menu from '../data/menu.json';
 import Container from 'react-bootstrap/Container';
 import Carousel from 'react-bootstrap/Carousel';
 import { Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
+import './Home.css'
 
 class Home extends React.Component {
 	state = { piattoSelezionato: menu[0] };
