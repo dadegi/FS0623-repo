@@ -108,16 +108,19 @@ class Prenotazione extends React.Component {
 				<Row className="justify-content-center mt-3">
 					<Col md={6}>
 						<h2 className="text-center">Modulo di prenotazione</h2>
-						{/* {this.state.showAlert === true && (
+                        {/* Con l'operatore SHORT CIRCUIT (&&) l'alert non viene inserito nel DOM finché showAlert è false */}
+						{this.state.showAlert === true && (
                             <Alert variant="info">Prenotazione salvata!</Alert>
-                        )} */}
-						<Alert
+                        )}
+
+                        {/* Con il ternario l'alert è comunque presente nel DOM con classe d-none, per cui non viene mostrato finché showAlert è false */}
+						{/* <Alert
 							variant="info"
 							className={
 								this.state.showAlert ? 'd-block' : 'd-none'
 							}>
 							Prenotazione salvata!
-						</Alert>
+						</Alert> */}
 
 						<Form onSubmit={this.handleSubmit}>
 							<Form.Group className="mb-3">
