@@ -25,13 +25,13 @@ class Prenotazione extends React.Component {
 				specialRequests: '',
 			},
 			showAlert: false,
-			nuova: true
+			nuova: true,
 		};
 	}
 
 	handleInputChange = (proprieta, valore) => {
 		this.setState({
-			prenotazione: { ...this.state.prenotazione, [proprieta]: valore }
+			prenotazione: { ...this.state.prenotazione, [proprieta]: valore },
 		});
 		// Se vogliamo utilizzare un parametro o una variabile come NOME di una proprietà di un oggetto dobbiamo valutare il contenuto del parametro o della variabile con le quadre []. In questo caso proprieta può essere name, phone, numberOfPeople...
 	};
@@ -40,7 +40,7 @@ class Prenotazione extends React.Component {
 		e.preventDefault();
 		console.log('Invio prenotazione');
 		this.setState({
-			nuova: false
+			nuova: false,
 		});
 		// Fetch con metodo POST
 		try {
@@ -65,7 +65,7 @@ class Prenotazione extends React.Component {
 						specialRequests: '',
 					},
 					showAlert: true,
-					nuova: true
+					nuova: true,
 				});
 			} else {
 				throw new Error('Errore nel salvataggio della prenotazione');
@@ -112,18 +112,16 @@ class Prenotazione extends React.Component {
 	render() {
 		return (
 			<Container>
-				{this.state.nuova === true && (
-					<ListaPrenotazioni />
-				)}
+				{this.state.nuova === true && <ListaPrenotazioni />}
 				<Row className="justify-content-center mt-3">
 					<Col md={6}>
 						<h2 className="text-center">Modulo di prenotazione</h2>
-                        {/* Con l'operatore SHORT CIRCUIT (&&) l'alert non viene inserito nel DOM finché showAlert è false */}
+						{/* Con l'operatore SHORT CIRCUIT (&&) l'alert non viene inserito nel DOM finché showAlert è false */}
 						{this.state.showAlert === true && (
-                            <Alert variant="info">Prenotazione salvata!</Alert>
-                        )}
+							<Alert variant="info">Prenotazione salvata!</Alert>
+						)}
 
-                        {/* Con il ternario l'alert è comunque presente nel DOM con classe d-none, per cui non viene mostrato finché showAlert è false */}
+						{/* Con il ternario l'alert è comunque presente nel DOM con classe d-none, per cui non viene mostrato finché showAlert è false */}
 						{/* <Alert
 							variant="info"
 							className={
