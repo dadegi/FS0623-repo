@@ -1,5 +1,7 @@
 import React from 'react';
 import { Row, Col, Container, Form, Button, Alert } from 'react-bootstrap';
+import ListaPrenotazioni from './ListaPrenotazioni';
+import { tr } from 'date-fns/locale';
 
 /* Quali campi usiamo per la prenotazione?
 1- name: string obbligatorio
@@ -23,12 +25,13 @@ class Prenotazione extends React.Component {
 				specialRequests: '',
 			},
 			showAlert: false,
+			nuova: true
 		};
 	}
 
 	handleInputChange = (proprieta, valore) => {
 		this.setState({
-			prenotazione: { ...this.state.prenotazione, [proprieta]: valore },
+			prenotazione: { ...this.state.prenotazione, [proprieta]: valore }
 		});
 		// Se vogliamo utilizzare un parametro o una variabile come NOME di una proprietà di un oggetto dobbiamo valutare il contenuto del parametro o della variabile con le quadre []. In questo caso proprieta può essere name, phone, numberOfPeople...
 	};
@@ -36,6 +39,9 @@ class Prenotazione extends React.Component {
 	handleSubmit = async e => {
 		e.preventDefault();
 		console.log('Invio prenotazione');
+		this.setState({
+			nuova: false
+		});
 		// Fetch con metodo POST
 		try {
 			const res = await fetch(
@@ -59,6 +65,7 @@ class Prenotazione extends React.Component {
 						specialRequests: '',
 					},
 					showAlert: true,
+					nuova: true
 				});
 			} else {
 				throw new Error('Errore nel salvataggio della prenotazione');
@@ -105,6 +112,9 @@ class Prenotazione extends React.Component {
 	render() {
 		return (
 			<Container>
+				{this.state.nuova === true && (
+					<ListaPrenotazioni />
+				)}
 				<Row className="justify-content-center mt-3">
 					<Col md={6}>
 						<h2 className="text-center">Modulo di prenotazione</h2>
