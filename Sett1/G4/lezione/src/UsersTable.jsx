@@ -5,7 +5,7 @@ class UsersTable extends React.Component {
     render() {
         const righe = this.props.users.map((utente) => {
             return (
-                <tr key={utente.id.toString()}>
+                <tr key={utente.id}>
                     <td>{utente.id}</td>
                     <td>{utente.name}</td>
                     <td>{utente.email}</td>
