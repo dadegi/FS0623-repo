@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 const UseEffect = () => {
 	const [counter, setCounter] = useState(0);
 	const [nome, setNome] = useState('Pippo');
+    const [nome2, setNome2] = useState('');
 
 	// Questo useEffect viene lanciato OGNI VOLTA che nel componente cambia qualcosa
     useEffect(() => {
@@ -37,6 +38,9 @@ const UseEffect = () => {
 				}>
 				Cambia nome
 			</button>
+            <br /><br />
+            <input type="text" onChange={(e) => setNome2(e.target.value)} />
+            <h3>Nome modificato: {nome2}</h3>
 		</div>
 	);
 };
