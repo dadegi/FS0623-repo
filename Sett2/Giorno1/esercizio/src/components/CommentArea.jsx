@@ -37,7 +37,7 @@ class CommentArea extends Component {
       {
         headers: {
           Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTljMjljZGUwZGQxZDAwMTgyZDE4YjQiLCJpYXQiOjE3MDQ3MzMxMzMsImV4cCI6MTcwNTk0MjczM30.iQcrWjbTsWpnknSarl5aGt0OIZdVmCV9H_Zgypx-EKE',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTlkNGIyMmU2Mjg4NjAwMTg4M2YzZTQiLCJpYXQiOjE3MDQ4MDcyMDIsImV4cCI6MTcwNjAxNjgwMn0.e7OmQxOgIHbkBsvGfPEfa5XC4EmRKU8OEByZa3ytfIQ',
         },
       }
     )
@@ -66,7 +66,7 @@ class CommentArea extends Component {
           <CommentsList reviews={this.state.comments} />
         </div>
         <div>
-          <AddComment bookId={this.props.bookId} aggiornaCommenti={this.aggiornaCommenti} />
+          <AddComment bookId={this.props.bookId} />
         </div>
       </div>
     )
