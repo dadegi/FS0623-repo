@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import {
 	Container,
 	Row,
@@ -8,22 +8,16 @@ import {
 	Button,
 	Alert,
 } from 'react-bootstrap';
+import { Trash3Fill } from 'react-bootstrap-icons';
 import { parseISO, format } from 'date-fns';
 import { it } from 'date-fns/locale';
 
-class ListaPrenotazioni extends React.Component {
-	constructor(props) {
-		super(props);
-        console.log('Constructor');
-		// Inseriamo nello state tutto quello che, quando si aggiorna, deve far avvenire qualcosa, quindi l'array delle prenotazioni, un booleano per il loader e un booleano per gestire messaggi di errore (queste ultime due cose rappresentano migliorie dell'esperienza utente - UX)
-		this.state = {
-			prenotazioni: [],
-			isLoading: true,
-			isError: false,
-		};
-	}
+const ListaPrenotazioni = () => {
+	const [prenotazioni, setPrenotazioni] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+	const [isError, setIsError] = useState(false);
 
-	getPrenotazioni = () => {
+	const getPrenotazioni = () => {
 		fetch('https://striveschool-api.herokuapp.com/api/reservation')
 			.then(response => {
 				if (response.ok) {
@@ -34,118 +28,98 @@ class ListaPrenotazioni extends React.Component {
 			})
 			.then(data => {
 				console.log('Prenotazioni:', data);
-				// OGNI VOLTA che viene settato lo state, il metodo render() viene AUTOMATICAMENTE richiamato
-				this.setState({
-					prenotazioni: data,
-					isLoading: false,
-				});
+				setPrenotazioni(data);
+				setIsLoading(false);
 			})
 			.catch(error => {
 				console.log('ERRORE!', error);
-				this.setState({
-					isLoading: false,
-					isError: true,
-				});
+				setIsLoading(false);
+				setIsError(true);
 			});
-		// È sbagliato chiamare setState all'interno del metodo render(), perché OGNI setState invoca render(), quindi genererebbe un loop infinito
 	};
 
-	// componentDidMount viene chiamato UNA SOLA VOLTA dopo il primo render, per cui siamo sicuri che non verrà più rieseguito per tutto il ciclo di vita del component
+	useEffect(() => {
+		getPrenotazioni();
+	}, []);
 
-	componentDidMount() {
-		this.getPrenotazioni();
-	}
-
-	render() {
-		return (
-			<>
-				<Container>
-					<Row className="justify-content-center mt-3">
-						<Col
-							md={8}
-							className={`col col-md-8 ${
-								this.state.isLoading ? 'mb-2' : 'mb-3'
-							}`}>
-							<h2 className="text-center my-3">
-								Prenotazioni registrate
-							</h2>
-							{this.state.isLoading && (
-								<div className="text-center mb-2">
-									<Spinner
-										animation="border"
-										variant="info"
-									/>
-								</div>
-							)}
-							{this.state.isError && (
-								<Alert variant="danger" className="text-center">
-									Errore nel recupero delle prenotazioni
-								</Alert>
-							)}
-							<ListGroup>
-								{this.state.prenotazioni.map(prenotazione => {
-									return (
-										<ListGroup.Item
-											key={prenotazione._id}
-											className="d-flex justify-content-between">
-											<div className="d-flex align-items-center">
-												{prenotazione.name} per{' '}
-												{prenotazione.numberOfPeople}{' '}
-												persone, il{' '}
-												{/*
-                                                Passaggi per convertire la data in un formato locale con date-fns:
-                                                1) convertire la data in un oggetto Date -- parseISO
-                                                2) convertire l'oggetto Date ottenuto in una stringa del formato desiderato -- format()
-                                                */}
-												{format(
-													parseISO(
-														prenotazione.dateTime
-													),
-													'd MMM yyyy',
-													{ locale: it }
-												)}
-											</div>
-											<Button
-												variant="light"
-												onClick={() => {
-													fetch(
-														'https://striveschool-api.herokuapp.com/api/reservation/' +
-															prenotazione._id,
-														{
-															method: 'DELETE',
-														}
-													)
-														.then(res => {
-															if (res.ok) {
-																console.log(
-																	'Prenotazione annullata'
-																);
-																this.getPrenotazioni();
-															} else {
-																throw new Error(
-																	'Annullamento della prenotazione non riuscito; ti tocca pagare! '
-																);
-															}
-														})
-														.catch(err => {
+	return (
+		<>
+			<Container>
+				<Row className="justify-content-center mt-3">
+					<Col
+						md={8}
+						className={`col col-md-8 ${
+							isLoading ? 'mb-2' : 'mb-3'
+						}`}>
+						<h2 className="text-center my-3">
+							Prenotazioni registrate
+						</h2>
+						{isLoading && (
+							<div className="text-center mb-2">
+								<Spinner animation="border" variant="info" />
+							</div>
+						)}
+						{isError && (
+							<Alert variant="danger" className="text-center">
+								Errore nel recupero delle prenotazioni
+							</Alert>
+						)}
+						<ListGroup>
+							{prenotazioni.map(prenotazione => {
+								return (
+									<ListGroup.Item
+										key={prenotazione._id}
+										className="d-flex justify-content-between">
+										<div className="d-flex align-items-center">
+											{prenotazione.name} per{' '}
+											{prenotazione.numberOfPeople}{' '}
+											persone, il{' '}
+											{format(
+												parseISO(prenotazione.dateTime),
+												'd MMM yyyy',
+												{ locale: it }
+											)}
+										</div>
+										<Button
+											variant="light"
+											onClick={() => {
+												fetch(
+													'https://striveschool-api.herokuapp.com/api/reservation/' +
+														prenotazione._id,
+													{
+														method: 'DELETE',
+													}
+												)
+													.then(res => {
+														if (res.ok) {
 															console.log(
-																'Errore:',
-																err
+																'Prenotazione annullata'
 															);
-														});
-												}}>
-												❌
-											</Button>
-										</ListGroup.Item>
-									);
-								})}
-							</ListGroup>
-						</Col>
-					</Row>
-				</Container>
-			</>
-		);
-	}
-}
+															getPrenotazioni();
+														} else {
+															throw new Error(
+																'Annullamento della prenotazione non riuscito; ti tocca pagare! '
+															);
+														}
+													})
+													.catch(err => {
+														console.log(
+															'Errore:',
+															err
+														);
+													});
+											}}>
+											<Trash3Fill />
+										</Button>
+									</ListGroup.Item>
+								);
+							})}
+						</ListGroup>
+					</Col>
+				</Row>
+			</Container>
+		</>
+	);
+};
 
 export default ListaPrenotazioni;
