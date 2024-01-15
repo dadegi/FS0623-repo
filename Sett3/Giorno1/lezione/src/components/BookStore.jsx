@@ -32,7 +32,7 @@ const BookStore = () => {
 	return (
 		<>
 			{books && (
-				<Row className="pb-3">
+				<Row className="center-row">
 					<Col lg={4}>
 						<BookList
 							bookSelected={bookSelected}

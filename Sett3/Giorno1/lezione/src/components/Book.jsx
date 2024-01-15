@@ -8,13 +8,12 @@ const Book = ({ book, changeBook, bookSelected }) => {
 			}
 			onClick={() => changeBook(book)}
 			style={{ cursor: 'pointer' }}>
-			<Card.Img
-				src={book.imageUrl}
-				alt="Copertina"
-				className="book-image img-fluid"
-			/>
-
-			<Card.Body className="d-flex flex-column">
+			<Card.Body className="d-flex">
+				<img
+					src={book.imageUrl}
+					className="book-image"
+					alt={`Copertina ${book.title}`}
+				/>
 				<div>
 					<Card.Text className="fw-bold">{book.title}</Card.Text>
 					<p>{book.price}</p>
