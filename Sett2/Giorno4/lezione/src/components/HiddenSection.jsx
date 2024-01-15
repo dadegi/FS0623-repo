@@ -7,7 +7,7 @@ const HiddenSection = () => {
 	return (
 		<div>
 			<Button variant="warning" onClick={() => setMostra(!mostra)}>
-				{mostra ? 'Nascondi' : 'Mostra'} contenuto
+				{mostra ? 'Mostra' : 'Nascondi'} contenuto
 			</Button>
 			{mostra && (
 				<Card className="mt-2">
