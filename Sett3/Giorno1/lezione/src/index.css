@@ -19,5 +19,14 @@ code {
 
 .background-div {
   background-color: beige;
-  padding: 20px;
+  padding: 20px
+}
+
+.custom-border {
+  box-shadow: inset 0px 0px 0px 2px black;
+}
+
+.book-image {
+  height: 80px;
+  margin-right: 2em;
 }

@@ -27,22 +27,26 @@ const BookStore = () => {
 		}
 	};
 
-    const changeBook = (book) => setBookSelected(book);
+	const changeBook = book => setBookSelected(book);
 
-    return (
-        <Row className="pb-3">
-            <Col lg={4}>
-                <BookList 
-                    bookSelected={bookSelected}
-                    changeBook={changeBook}
-                    books={books}
-                />
-            </Col>
-            <Col lg={8}>
-                <BookDetail bookSelected={bookSelected} />
-            </Col>
-        </Row>
-    )
+	return (
+		<>
+			{books && (
+				<Row className="pb-3">
+					<Col lg={4}>
+						<BookList
+							bookSelected={bookSelected}
+							changeBook={changeBook}
+							books={books}
+						/>
+					</Col>
+					<Col lg={8}>
+						<BookDetail bookSelected={bookSelected} />
+					</Col>
+				</Row>
+			)}
+		</>
+	);
 };
 
 export default BookStore;
