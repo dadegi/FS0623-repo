@@ -5,6 +5,7 @@ import BookStore from './components/BookStore';
 import Cart from './components/Cart';
 import CartIndicator from './components/CartIndicator';
 import Footer from './components/Footer';
+import Error401 from './components/Error401';
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -19,11 +20,12 @@ function App() {
 							<h1>Book Store</h1>
 						</Link>
 					</Col>
-					{user && <CartIndicator />}
+					<CartIndicator />
 				</Row>
 				<Routes>
 					<Route path="/" element={<BookStore />} />
 					<Route path="/cart" element={<Cart />} />
+					<Route path="/error401" element={<Error401 />} />
 				</Routes>
 			</Container>
 			<Footer />

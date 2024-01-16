@@ -1,10 +1,22 @@
 import { Row, Col, Button } from 'react-bootstrap';
 import { FaTrash } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
+import { removeFromCartAction } from '../redux/actions';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const Cart = () => {
 	const cart = useSelector(state => state.cart.content);
 	const dispatch = useDispatch();
+	const isLoggedIn = useSelector((state) => state.user.username);
+	const navigate = useNavigate();
+
+	// protezione della rotta scritta direttamente nell'url
+	useEffect(() => {
+		if (!isLoggedIn) {
+			navigate('/error401')
+		}
+	}, [isLoggedIn, navigate]);
 
 	return (
 		<Row>
@@ -18,10 +30,7 @@ const Cart = () => {
 								<Button
 									variant="danger"
 									onClick={() => {
-										dispatch({
-											type: 'REMOVE_FROM_CART',
-											payload: i,
-										});
+										dispatch(removeFromCartAction(i));
 									}}>
 									<FaTrash />
 								</Button>
