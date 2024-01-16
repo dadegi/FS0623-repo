@@ -21,13 +21,13 @@ const CartIndicator = () => {
 			{/* se c'è l'utente, viene stampato il nome e non compare il form, altrimenti c'è il form per consentire il login */}
 			{user ? (
 				<>
-					<span>Benvenuto, {user}!</span>&nbsp;
+					<span className="me-2">Benvenuto, {user}!</span>
 					<Button
 						onClick={() => navigate('cart')}
-						className="d-flex align-items-center">
+						className="d-flex align-items-center me-2">
 						<FaShoppingCart />
 						<span className="ms-2">{cartLength}</span>
-					</Button>&nbsp;
+					</Button>
 					<Button className="d-flex align-items-center bg-danger" onClick={() => {
 						dispatch(setUsernameAction(''));
 						setInputValue('');
