@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "email": "abel@sassu.com",
+      "password": "$2a$10$o5NRLuyAHkuOj1Myeo7DeeNEh17JDueLBr7F5HrcOlK4cdoh6yJ.6",
+      "nome": "Abel",
+      "cognome": "Sassu",
+      "id": 1
+    },
+    {
+      "email": "domenico@villani.com",
+      "password": "$2a$10$6ZSh3Q3MC9.zk3kafQHcAuLyfEwOmLIdIBOx5Eer5EW0gWFmjs/ny",
+      "nome": "Domenico",
+      "cognome": "Villani",
+      "id": 2
+    }
+  ],
+  "dbprova": [
+    {
+      "id": 1,
+      "titolo": "The dark side of the moon",
+      "autore": "Pink Floyd",
+      "anno": 1973
+    },
+    {
+      "id": 2,
+      "titolo": "Le Zeppelin IV",
+      "autore": "Led Zeppelin",
+      "anno": 1971
+    },
+    {
+      "id": 3,
+      "titolo": "Tommy",
+      "autore": "The Who",
+      "anno": 1975
+    },
+    {
+      "titolo": "Mecca for moderns",
+      "autore": "Manhattan Transfer",
+      "anno": "1978",
+      "id": 4
+    }
+  ]
+}
