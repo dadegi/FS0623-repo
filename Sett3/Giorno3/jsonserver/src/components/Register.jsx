@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import miaVariabile from '../variables/variables';
 
 const Register = () => {
 	const navigate = useNavigate();
@@ -29,7 +30,7 @@ const Register = () => {
 			cognome: data.cognome,
 		};
 		axios
-			.post('http://localhost:3002/register', userData)
+			.post(miaVariabile.apiUrl + 'register', userData)
 			.then(response => {
 				console.log(response.status);
 			})

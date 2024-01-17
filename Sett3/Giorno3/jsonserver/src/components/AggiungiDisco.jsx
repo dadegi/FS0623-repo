@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import miaVariabile from '../variables/variables';
 
 const AggiungiDisco = () => {
 	const navigate = useNavigate();
@@ -27,12 +28,13 @@ const AggiungiDisco = () => {
 			anno: data.anno,
 		};
 		axios
-			.post('http://localhost:3002/dbprova', dataDisco)
+			.post(miaVariabile.apiUrl + 'dbprova', dataDisco)
 			.then(response => {
 				console.log(response.status);
-			}).catch(error => {
-                console.log(error);
-            });
+			})
+			.catch(error => {
+				console.log(error);
+			});
 		navigate('/');
 	};
 

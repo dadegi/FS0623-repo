@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import SingleData from "./SingleData";
+import miaVariabile from '../variables/variables';
 
 const Main = () => {
     const [myData, setMyData] = useState([]);
@@ -11,7 +12,7 @@ const Main = () => {
     }, []);
 
     const getData = () => {
-        axios.get('http://localhost:3002/dbprova').then(response => {
+        axios.get(miaVariabile.apiUrl + 'dbprova').then(response => {
             setMyData(response.data);
         });
     };
