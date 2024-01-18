@@ -1,14 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import miaVariabile from '../variables/variables';
 
 const Login = () => {
 	const navigate = useNavigate();
+
 	const [data, setData] = useState({
 		email: '',
 		password: '',
 	});
+
+	useEffect(() => {
+		const user = JSON.parse(localStorage.getItem('utente'));
+		if (user) {
+			alert('sei gia loggato');
+			return navigate('/');
+		}
+	}, []);
 
 	const handleChange = e => {
 		const value = e.target.value;
@@ -30,7 +39,7 @@ const Login = () => {
 				console.log(response);
 				alert('Login effettutato');
 				const utente = response.data;
-                console.log(utente);
+				console.log(utente);
 				localStorage.setItem('utente', JSON.stringify(utente));
 				navigate('/');
 			})
@@ -40,32 +49,36 @@ const Login = () => {
 	};
 
 	return (
-		<div>
-			<h1>Login</h1>
-			<form onSubmit={handleSubmit}>
-				<label htmlFor="email">
-					Email &nbsp;
-					<input
-						type="email"
-						name="email"
-						value={data.email}
-						onChange={handleChange}
-					/>
-				</label>
-				<p>&nbsp;</p>
-                <label htmlFor="password">
-					Email &nbsp;
-					<input
-						type="password"
-						name="password"
-						value={data.password}
-						onChange={handleChange}
-					/>
-				</label>
-				<p>&nbsp;</p>
-                <button type="submit">Login</button>
-			</form>
-		</div>
+		<>
+			{!localStorage.getItem('utente') && (
+				<div>
+					<h1>Login</h1>
+					<form onSubmit={handleSubmit}>
+						<label htmlFor="email">
+							Email &nbsp;
+							<input
+								type="email"
+								name="email"
+								value={data.email}
+								onChange={handleChange}
+							/>
+						</label>
+						<p>&nbsp;</p>
+						<label htmlFor="password">
+							Email &nbsp;
+							<input
+								type="password"
+								name="password"
+								value={data.password}
+								onChange={handleChange}
+							/>
+						</label>
+						<p>&nbsp;</p>
+						<button type="submit">Login</button>
+					</form>
+				</div>
+			)}
+		</>
 	);
 };
 

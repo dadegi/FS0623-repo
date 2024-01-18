@@ -7,7 +7,7 @@ const MyNavbar = () => {
 
 	const logout = () => {
 		localStorage.removeItem('utente');
-        navigate('/login');
+        navigate('/');
 	};
 
 	return (
