@@ -5,6 +5,7 @@ import Main from './components/Main';
 import AggiungiDisco from './components/AggiungiDisco';
 import MyNavbar from './components/MyNavbar';
 import Register from './components/Register';
+import Login from './components/Login';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
 						<Route path='/' element={<Main />} />
 						<Route path='/aggiungi' element={<AggiungiDisco />} />
 						<Route path='/registrati' element={<Register />} />
+						<Route path='/login' element={<Login />} />
 					</Routes>
 				</Container>
 			</div>
