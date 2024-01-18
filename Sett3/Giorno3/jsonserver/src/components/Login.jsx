@@ -65,7 +65,7 @@ const Login = () => {
 						</label>
 						<p>&nbsp;</p>
 						<label htmlFor="password">
-							Email &nbsp;
+							Password &nbsp;
 							<input
 								type="password"
 								name="password"
