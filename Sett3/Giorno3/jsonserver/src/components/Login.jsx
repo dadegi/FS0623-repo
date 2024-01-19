@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import miaVariabile from '../variables/variables';
 
@@ -74,7 +74,9 @@ const Login = () => {
 							/>
 						</label>
 						<p>&nbsp;</p>
-						<button type="submit">Login</button>
+						<button type="submit" className="btn btn-primary me-3">Login</button>
+						<span>oppure</span>
+						<Link to="/registrati" className="btn btn-success ms-3">Registrati</Link>
 					</form>
 				</div>
 			)}
